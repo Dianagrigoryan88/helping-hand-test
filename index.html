@@ -18,15 +18,11 @@
     :function(){return o.l.push([n,arguments])&&o}},t=d.getElementsByTagName(s)[0],
     j=d.createElement(s);j.async=!0;j.src='https://cdn.fundraiseup.com/widget/'+a;
     t.parentNode.insertBefore(j,t);o.s=Date.now();o.v=4;o.h=w.location.href;o.l=[];
-    for(i=0;i<7;i++)o[l[i]]=o(l[i]);
-    
-    w[n]=o;
-    // THIS LINE ENABLES TEST MODE FOR THE 4242 CARD
-    w[n].set('test', true); 
-    }
+    for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
     })(window,document,'script','FundraiseUp','AEMZUDUM');</script>
 
     <style>
+        /* This forces the body to take up the full screen and center its children */
         html, body {
             height: 100%;
             margin: 0;
@@ -35,8 +31,8 @@
 
         body {
             display: flex;
-            justify-content: center; 
-            align-items: center;     
+            justify-content: center; /* Horizontal centering */
+            align-items: center;     /* Vertical centering */
             text-align: center;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: #f8f9fa;
@@ -63,6 +59,7 @@
             font-size: 16px;
         }
 
+        /* Styling the Fundraise Up button */
         .donation-button {
             background-color: #ff5a5f;
             color: white;
@@ -86,29 +83,25 @@
         <h1>Helping Hand Charity</h1>
         <p>Fundraise Up & Google Analytics 4 Demo</p>
         
-        <a href="#XJKDHSTQ" class="donation-button">Donate $700</a>
+        <a href="#XJKDHSTQ?testmode=yes" class="donation-button">Donate $700</a>
     </div>
 
     <script>
       FundraiseUp.on('checkoutOpen', function(details) {
           gtag('event', 'begin_checkout', {
               'event_category': 'FundraiseUp',
-              'event_label': 'Demo Checkout',
-              'value': 700.00,
-              'currency': 'USD'
+              'event_label': 'Demo Checkout'
           });
       });
 
       FundraiseUp.on('donationComplete', function(details) {
           gtag('event', 'purchase', {
               'transaction_id': details.donation.id,
-              'value': 700.00, 
+              'value': 700, // Explicitly tracking the $700 goal
               'currency': 'USD',
               'items': [{
                   'item_name': 'Donation',
-                  'item_id': 'demo_gift',
-                  'price': 700.00,
-                  'quantity': 1
+                  'item_id': 'demo_gift'
               }]
           });
       });
