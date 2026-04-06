@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ID_HERE"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helping Hand Demo</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-19T2SLD00R"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-19T2SLD00R'); // G-19T2SLD00R
+      gtag('config', 'G-19T2SLD00R'); 
     </script>
 
     <script>(function(w,d,s,n,a){if(!w[n]){var l='call,catch,on,once,set,then,track'
@@ -16,24 +20,64 @@
     t.parentNode.insertBefore(j,t);o.s=Date.now();o.v=4;o.h=w.location.href;o.l=[];
     for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
     })(window,document,'script','FundraiseUp','AEMZUDUM');</script>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: sans-serif;
+            background-color: #f4f7f6;
+        }
+        .container { max-width: 600px; }
+        .donation-button {
+            background-color: #ff5a5f;
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Helping Hand Charity Demo</h1>
-    <p>Click the button below to test the integration:</p>
+    <div class="container">
+        <h1>Helping Hand Charity</h1>
+        <p>GA4 Integration Demo (ID: G-19T2SLD00R)</p>
+        <a href="#XJKDHSTQ" class="donation-button">Donate $700 Now</a>
+    </div>
 
-    <a href="#XJKDHSTQ" class="donation-button">Donate Now</a>
+    <script>
+      // This part listens for Fundraise Up events
+      FundraiseUp.on('checkoutOpen', function(details) {
+          console.log("Checkout opened!");
+          gtag('event', 'begin_checkout', {
+              'event_category': 'FundraiseUp',
+              'event_label': 'Checkout Opened'
+          });
+      });
 
-    <style>
-        .donation-button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-family: sans-serif;
-        }
-    </style>
+      FundraiseUp.on('donationComplete', function(details) {
+          console.log("Donation successful!");
+          // This sends the $700 purchase data to your Google Analytics
+          gtag('event', 'purchase', {
+              'transaction_id': details.donation.id,
+              'value': details.donation.amount,
+              'currency': details.donation.currency,
+              'items': [{
+                  'item_name': 'Donation',
+                  'item_id': 'fundraise_up_widget',
+                  'price': details.donation.amount,
+                  'quantity': 1
+              }]
+          });
+      });
+    </script>
 
 </body>
 </html>
