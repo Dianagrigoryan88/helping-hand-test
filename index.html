@@ -1,28 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <meta charset="UTF-8">
+    <title>Helping Hand - Donation Test Page</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V33D8SWCTB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      gtag('config', 'G-V33D8SWCTB');
     </script>
 
     <script>(function(w,d,s,n,a){if(!w[n]){var l='call,catch,on,once,set,then,track'.split(','),i,o=function(n){return'function'==typeof n?o.l.push([arguments])&&o:function(){return o.l.push([n,arguments])&&o}},t=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=!0;j.src='https://cdn.fundraiseup.com/widget/'+a;t.parentNode.insertBefore(j,t);o.s=Date.now();o.v=4;o.h=w.location.href;o.l=[];for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}})(window,document,'script','FundraiseUp','AEMZUDUM');</script>
 
     <script>
+      // Track when the Checkout opens
       FundraiseUp.on('checkoutOpen', function() {
-          console.log('Checkout opened!');
-          gtag('event', 'fundraiseup_checkout_open', {
-              'event_category': 'fundraising',
-              'event_label': 'Helping Hand Button'
+          console.log("GA Event: Checkout Opened");
+          gtag('event', 'fundraiseup_checkout_open');
+      });
+
+      // Track when the $700 donation is completed
+      FundraiseUp.on('donationComplete', function(details) {
+          console.log("GA Event: Donation Complete", details);
+          gtag('event', 'purchase', {
+              transaction_id: details.donationId,
+              value: 700.00,
+              currency: 'USD',
+              items: [{
+                  item_name: 'Donation',
+                  affiliation: 'Helping Hand'
+              }]
           });
       });
     </script>
 </head>
 <body>
-    <h1>Helping Hand Donation Page</h1>
-    <a href="#XJKDHSTQ">Donate Now</a>
+    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        <h1>Helping Hand Charity</h1>
+        <p>Support our mission by clicking the button below.</p>
+        
+        <a href="#XJKDHSTQ" style="background-color: #007bff; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Donate $700</a>
+    </div>
 </body>
 </html>
